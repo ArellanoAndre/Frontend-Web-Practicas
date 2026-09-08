@@ -1,0 +1,36 @@
+[
+  {
+    "id": "L001",
+    "title": "El principito",
+    "author": "Antoine de Saint-Exupéry",
+    "copies": 2,
+    "year": 1943
+  },
+  {
+    "id": "L002",
+    "title": "1984",
+    "author": "George Orwell",
+    "copies": 1,
+    "year": 1949
+  },
+  {
+    "id": "L003",
+    "title": "Cien años de soledad",
+    "author": "Gabriel García Márquez",
+    "copies": 2,
+    "year": 1967
+  },
+  {
+    "id": 25,
+    "title": "Registro incorrecto 1",
+    "author": "Desconocido",
+    "copies": 1
+  },
+  {
+    "id": "L005",
+    "title": "Registro incorrecto 2",
+    "author": "Desconocido",
+    "copies": "muchos"
+  }
+]
+
