@@ -1,0 +1,63 @@
+﻿@startuml
+title Practica 10 - Autenticacion y Autorizacion JWT
+
+skinparam backgroundColor #FFFFFF
+skinparam activity {
+    BackgroundColor #EAF2F8
+    BorderColor #2471A3
+    FontColor #17202A
+    DiamondBackgroundColor #FCF3CF
+    DiamondBorderColor #B7950B
+    ArrowColor #2471A3
+}
+skinparam shadowing false
+
+start
+
+:Usuario ingresa correo y contraseña;
+:POST /auth/login;
+
+:AuthService busca usuario
+en MySQL mediante Prisma;
+
+:Verificar contraseña con bcrypt;
+
+if (Credenciales validas?) then (Si)
+    :Generar token JWT;
+    note right
+      Payload:
+      - sub: ID del usuario
+      - email: correo
+      - rol: miembro, entrenador o admin
+    end note
+
+    :Devolver access_token;
+    :Cliente solicita ruta protegida;
+    :Enviar Authorization: Bearer token;
+
+    :JwtAuthGuard revisa la solicitud;
+
+    if (Token presente y valido?) then (Si)
+        :JwtStrategy verifica firma
+        y fecha de expiracion;
+
+        :Obtener identidad y rol
+        del usuario;
+
+        if (Tiene permiso para la operacion?) then (Si)
+            :Ejecutar operacion solicitada;
+            :Responder HTTP 200 o 201;
+        else (No)
+            :Responder HTTP 403 Forbidden;
+        endif
+
+    else (No)
+        :Responder HTTP 401 Unauthorized;
+    endif
+
+else (No)
+    :Responder HTTP 401 Unauthorized;
+endif
+
+stop
+@enduml
