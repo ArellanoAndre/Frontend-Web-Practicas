@@ -1,0 +1,60 @@
+﻿<header class="barra">
+  <div class="barra__interior">
+    <div class="barra__marca">
+      <img src="/logo.svg" alt="Gimnasio Titanes" />
+      <span>Gimnasio Titanes</span>
+    </div>
+    <span class="barra__etiqueta">Panel de administración</span>
+  </div>
+</header>
+
+<main class="pagina">
+  <div class="encabezado">
+    <div>
+      <h1>Tablero de clases</h1>
+      <p>Administración del catálogo del gimnasio</p>
+    </div>
+  </div>
+
+  <section class="resumen">
+    <div class="resumen__dato">
+      <span class="resumen__numero">{{ totalClases() }}</span>
+      <span class="resumen__texto">Clases disponibles</span>
+    </div>
+
+    <div class="resumen__dato">
+      <span class="resumen__numero">{{ minutosSemana() }}</span>
+      <span class="resumen__texto">Minutos por semana</span>
+    </div>
+
+    <div class="resumen__dato">
+      <span class="resumen__numero">{{ clasesLargas() }}</span>
+      <span class="resumen__texto">Clases de 60 minutos o más</span>
+    </div>
+  </section>
+
+  <section class="tarjeta">
+    <div class="encabezado">
+      <div>
+        <h2>Catálogo de clases</h2>
+        <p>Consulta las actividades disponibles.</p>
+      </div>
+      <div>
+        <button type="button" (click)="vaciarCatalogo()">
+          Vaciar catálogo
+        </button>
+        <button type="button" (click)="restaurarCatalogo()">
+          Restaurar catálogo
+        </button>
+      </div>
+    </div>
+
+    <div class="rejilla">
+      @for (clase of clases(); track clase.id) {
+        <app-tarjeta-clase [clase]="clase" />
+      } @empty {
+        <p class="vacio">No hay clases disponibles.</p>
+      }
+    </div>
+  </section>
+</main>
